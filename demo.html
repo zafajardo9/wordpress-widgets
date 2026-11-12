@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Omni Widget Pack Demo</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@500;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/omni-widget-pack.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css">
+	<script src="assets/js/omni-interactions.js" defer></script>
+	<style>
+		body { margin: 0; background: #f4f5f2; color: #102630; font: 1rem/1.55 "DM Sans", system-ui, sans-serif; }
+		.gallery { width: min(100% - 2rem, 76rem); margin-inline: auto; }
+		.gallery-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; border-bottom: 1px solid #d8ded9; }
+		.gallery-brand { display: inline-flex; align-items: center; gap: .7rem; color: inherit; font-weight: 700; text-decoration: none; }
+		.gallery-mark { display: grid; width: 2rem; height: 2rem; place-items: center; border-radius: .65rem; background: #102630; color: var(--owp-yellow); font-size: 1.15rem; }
+		.gallery-header > a:last-child { color: inherit; font-weight: 700; text-underline-offset: .25em; }
+		.gallery-intro { display: grid; gap: .65rem; padding-block: clamp(2rem, 4vw, 3.5rem) 1.5rem; }
+		.gallery h1, .gallery-example > h2, .gallery .owp-team__name { font-family: "Instrument Sans", system-ui, sans-serif; }
+		.gallery h1 { margin: 0; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; line-height: 1; letter-spacing: -.065em; }
+		.gallery-intro p { max-width: 42rem; margin: 0; color: #42565e; }
+		.gallery-index { display: flex; flex-wrap: wrap; gap: .45rem; padding-block: 1.25rem; }
+		.gallery-index a { padding: .45rem .75rem; border: 1px solid #d8ded9; border-radius: 999px; background: white; color: #102630; font-size: .875rem; font-weight: 600; text-decoration: none; }
+		.gallery-index a:is(:hover, :focus-visible) { border-color: #102630; }
+		.gallery-example { min-width: 0; scroll-margin-top: 1rem; }
+		.gallery-example > h2 { margin: 0 0 .75rem; font-size: 1.25rem; font-weight: 800; letter-spacing: -.025em; }
+		.gallery-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.5rem; padding-block: 1.75rem; border-top: 1px solid #d8ded9; }
+		.gallery-grid > .gallery-example { grid-column: span 6; display: grid; grid-template-rows: auto 1fr; }
+		.gallery-grid > :is(#owp-service-card, #owp-info-card, #owp-feature-card) { grid-column: span 2; }
+		.gallery-grid > :is(#owp-accordion, #owp-button) { grid-column: span 3; }
+		.gallery-preview { padding: clamp(1rem, 2.5vw, 1.75rem); background: var(--owp-white); border: 1px solid #d8ded9; border-radius: 1.125rem; overflow: hidden; }
+		.gallery-preview--flush { padding: 0; }
+		.gallery-cta { padding: clamp(.5rem, calc(6vw - 1rem), 3rem); background: #f1f8fc; font-family: Poppins, system-ui, sans-serif; }
+		.gallery-milestones { padding: clamp(1.25rem, 4vw, 3.25rem); background: radial-gradient(ellipse at top, #164762, #081d2c 75%); }
+		.gallery-contact { padding-block: 1rem 2.5rem; }
+		.gallery-contact a { color: inherit; }
+		.gallery .owp-team { gap: .8rem; }
+		.gallery .owp-team__profile { min-height: 24rem; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.25rem, 4vw, 3.5rem); }
+		.gallery .owp-team__profile[hidden] { display: none; }
+		.gallery .owp-team__copy { gap: .75rem; padding-block: 1rem; }
+		.gallery .owp-team__name { font-size: clamp(2rem, 4.6vw, 4.25rem); line-height: 1.02; letter-spacing: -.06em; }
+		.gallery .owp-team__position { color: #176288; }
+		.gallery .owp-team__bio { max-width: 34rem; margin-top: .5rem; color: var(--owp-muted); }
+		.gallery-portrait { --portrait-offset: 0%; background: url("assets/demo/team-portraits.png") var(--portrait-offset) center / 300% auto no-repeat; }
+		.gallery-portrait--jamie { --portrait-offset: 50%; }
+		.gallery-portrait--dani { --portrait-offset: 100%; }
+		.gallery .owp-team__profile > .gallery-portrait { width: 100%; min-width: 0; min-height: 100%; aspect-ratio: 5 / 4; border-radius: 1.5rem; }
+		.gallery .owp-team__controls { gap: .5rem; }
+		.gallery .owp-team__track { padding-block: .35rem .65rem; }
+		.gallery .owp-team__card { flex-basis: calc((100% - 24px) / 3); min-height: 6rem; }
+		.gallery .owp-team__thumb { flex: 0 0 6rem; align-self: stretch; }
+		.gallery .owp-team__thumb:empty { display: block; }
+		@media (max-width: 860px) {
+			.gallery .owp-team__card { flex-basis: min(15rem, 82%); }
+			.gallery-grid > :is(#owp-service-card, #owp-info-card, #owp-feature-card, #owp-accordion, #owp-button) { grid-column: span 6; }
+		}
+		@media (max-width: 600px) {
+			.gallery-cta { padding: .5rem; }
+			.gallery .owp-team__profile { grid-template-columns: 1fr; min-height: 0; }
+			.gallery .owp-team__profile > .gallery-portrait { order: -1; min-height: 0; aspect-ratio: 5 / 4; }
+			.gallery .owp-team__arrow { flex-basis: 36px; min-height: 36px; }
+			.gallery .owp-team__thumb { flex-basis: 4.5rem; }
+		}
+	</style>
+</head>
+<body>
+<header class="gallery gallery-header" id="top">
+	<a class="gallery-brand" href="#top"><span class="gallery-mark" aria-hidden="true">✦</span> Omni Widget Pack</a>
+	<a href="#widget-gallery">Browse widgets</a>
+</header>
+<main class="gallery">
+	<div class="gallery-intro">
+		<h1>Widget showcase</h1>
+		<p>Explore twelve Elementor widgets, from interactive team profiles to the building blocks of a business website.</p>
+	</div>
+	<section class="gallery-example" id="owp-team-carousel">
+		<h2>Our Team Carousel</h2>
+		<div class="owp-team owp-widget" role="region" aria-label="Example team profiles">
+			<article class="owp-team__profile" id="demo-team-alex">
+				<div class="owp-team__copy">
+					<h3 class="owp-team__name">Alex Rivera</h3>
+					<p class="owp-team__position">Managing Director</p>
+					<div class="owp-team__bio"><p>Alex works with founders to map out the practical steps of starting and growing a business in the Philippines, from the first registration through day-to-day operations.</p></div>
+				</div>
+				<div class="gallery-portrait" role="img" aria-label="Illustrative portrait of Alex Rivera"></div>
+			</article>
+			<article class="owp-team__profile" id="demo-team-jamie" hidden>
+				<div class="owp-team__copy">
+					<h3 class="owp-team__name">Jamie Santos</h3>
+					<p class="owp-team__position">Operations Manager</p>
+					<div class="owp-team__bio"><p>Jamie coordinates the people and processes behind each engagement. He keeps track of deadlines, paperwork, and handoffs so clients know what to expect at every stage.</p></div>
+				</div>
+				<div class="gallery-portrait gallery-portrait--jamie" role="img" aria-label="Illustrative portrait of Jamie Santos"></div>
+			</article>
+			<article class="owp-team__profile" id="demo-team-dani" hidden>
+				<div class="owp-team__copy">
+					<h3 class="owp-team__name">Dani Reyes</h3>
+					<p class="owp-team__position">Client Services Lead</p>
+					<div class="owp-team__bio"><p>Dani is the first point of contact for clients navigating a new market. She turns questions about requirements and timelines into a practical plan the whole team can follow.</p></div>
+				</div>
+				<div class="gallery-portrait gallery-portrait--dani" role="img" aria-label="Illustrative portrait of Dani Reyes"></div>
+			</article>
+			<div class="owp-team__navigation">
+				<div class="owp-team__heading">Our Team</div>
+				<div class="owp-team__controls">
+					<button class="owp-team__arrow" type="button" data-owp-team-step="-1" aria-label="Previous team member"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+					<div class="owp-team__track" role="group" aria-label="Team members">
+						<button class="owp-team__card" type="button" aria-controls="demo-team-alex" aria-pressed="true">
+							<span class="owp-team__card-copy"><span class="owp-team__card-name">Alex Rivera</span><span class="owp-team__card-position">Managing Director</span></span>
+							<span class="owp-team__thumb gallery-portrait" aria-hidden="true"></span>
+						</button>
+						<button class="owp-team__card" type="button" aria-controls="demo-team-jamie" aria-pressed="false">
+							<span class="owp-team__card-copy"><span class="owp-team__card-name">Jamie Santos</span><span class="owp-team__card-position">Operations Manager</span></span>
+							<span class="owp-team__thumb gallery-portrait gallery-portrait--jamie" aria-hidden="true"></span>
+						</button>
+						<button class="owp-team__card" type="button" aria-controls="demo-team-dani" aria-pressed="false">
+							<span class="owp-team__card-copy"><span class="owp-team__card-name">Dani Reyes</span><span class="owp-team__card-position">Client Services Lead</span></span>
+							<span class="owp-team__thumb gallery-portrait gallery-portrait--dani" aria-hidden="true"></span>
+						</button>
+					</div>
+					<button class="owp-team__arrow" type="button" data-owp-team-step="1" aria-label="Next team member"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<nav class="gallery-index" id="widget-gallery" aria-label="Jump to a widget">
+		<a href="#owp-navbar">Navigation Bar</a>
+		<a href="#owp-hero">Hero Section</a>
+		<a href="#owp-service-milestones">Service Milestones</a>
+		<a href="#owp-container">Site Container</a>
+		<a href="#owp-button">Button</a>
+		<a href="#owp-service-card">Service Card</a>
+		<a href="#owp-feature-card">Feature Card</a>
+		<a href="#owp-info-card">Info Card</a>
+		<a href="#owp-cta-banner">CTA Banner</a>
+		<a href="#owp-accordion">Accordion / FAQ</a>
+		<a href="#owp-team-carousel">Our Team Carousel</a>
+		<a href="#owp-footer">Universal Footer</a>
+	</nav>
+
+	<div class="gallery-grid">
+	<section class="gallery-example" id="owp-navbar">
+		<h2>Navigation Bar</h2>
+		<div class="gallery-preview">
+			<header class="owp-navbar owp-widget">
+				<a class="owp-navbar__brand" href="#top">FilePino</a>
+				<nav class="owp-navbar__desktop" aria-label="Example site navigation">
+					<ul class="owp-nav-links">
+						<li><a class="owp-nav-link" href="#top">Home</a></li>
+						<li><a class="owp-nav-link" href="#owp-service-card">Services</a></li>
+						<li><a class="owp-nav-link" href="#owp-accordion">FAQ</a></li>
+						<li><a class="owp-action owp-action--primary" href="#contact">Talk to Us</a></li>
+					</ul>
+				</nav>
+				<button class="owp-navbar__open" type="button" aria-haspopup="dialog" aria-controls="demo-menu" aria-expanded="false" hidden>Menu</button>
+				<dialog class="owp-navbar__drawer" id="demo-menu" aria-label="Example site navigation">
+					<form method="dialog"><button class="owp-navbar__close" type="submit">Close menu</button></form>
+					<nav aria-label="Mobile site navigation">
+						<ul class="owp-nav-links">
+							<li><a class="owp-nav-link" href="#top">Home</a></li>
+							<li><a class="owp-nav-link" href="#owp-service-card">Services</a></li>
+							<li><a class="owp-nav-link" href="#owp-accordion">FAQ</a></li>
+							<li><a class="owp-action owp-action--primary" href="#contact">Talk to Us</a></li>
+						</ul>
+					</nav>
+				</dialog>
+			</header>
+		</div>
+	</section>
+
+	<section class="gallery-example" id="owp-hero">
+		<h2>Hero Section</h2>
+		<div class="gallery-preview gallery-preview--flush">
+			<div class="owp-hero owp-hero--split owp-widget">
+				<div class="owp-hero__copy">
+					<h3 class="owp-widget-heading">Build your business with confidence</h3>
+					<p class="owp-hero__description">Get connected support for starting and growing your Philippine business.</p>
+					<div class="owp-actions">
+						<a class="owp-action owp-action--primary" href="#contact">Talk to Us</a>
+						<a class="owp-action owp-action--text" href="#owp-service-card">Explore our services <span aria-hidden="true">→</span></a>
+					</div>
+				</div>
+				<ol class="owp-hero__milestones" aria-label="Service milestones">
+					<li><span>Discover</span></li>
+					<li><span>Plan</span></li>
+					<li><span>Build</span></li>
+					<li><span>Launch</span></li>
+					<li><span>Grow</span></li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<section class="gallery-example" id="owp-service-milestones">
+		<h2>Service Milestones</h2>
+		<div class="gallery-preview gallery-milestones">
+			<ol class="owp-milestones owp-widget" aria-label="Service milestones">
+				<li class="owp-milestones__item"><span class="owp-milestones__marker" aria-hidden="true"><i class="fas fa-file-alt"></i></span><span class="owp-milestones__label">Establishment &amp; Registration</span></li>
+				<li class="owp-milestones__item"><span class="owp-milestones__marker" aria-hidden="true"><i class="fas fa-cog"></i></span><span class="owp-milestones__label">Operations</span></li>
+				<li class="owp-milestones__item"><span class="owp-milestones__marker" aria-hidden="true"><i class="fas fa-shield-alt"></i></span><span class="owp-milestones__label">Compliance</span></li>
+				<li class="owp-milestones__item"><span class="owp-milestones__marker" aria-hidden="true"><i class="fas fa-user-friends"></i></span><span class="owp-milestones__label">People &amp; HR</span></li>
+				<li class="owp-milestones__item"><span class="owp-milestones__marker" aria-hidden="true"><i class="fas fa-chart-line"></i></span><span class="owp-milestones__label">Sustainable Growth</span></li>
+			</ol>
+		</div>
+	</section>
+
+	<section class="gallery-example" id="owp-container">
+		<h2>Site Container</h2>
+		<div class="gallery-preview gallery-preview--flush owp-surface-tint">
+			<div class="owp-container">
+				<div class="owp-container__inner">
+					<article class="owp-feature-card owp-widget">
+						<h3 class="owp-widget-title">Section content</h3>
+						<p class="owp-feature-card__description">This Feature Card and Button sit inside the same responsive container. In Elementor, drag widgets into its Section Content area.</p>
+					</article>
+					<p><a class="owp-button owp-action owp-action--primary" href="#owp-button">See button styles</a></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="gallery-example" id="owp-button">
+		<h2>Button</h2>
+		<div class="gallery-preview owp-actions">
+			<span class="owp-button-hover-lift"><a class="owp-button owp-action owp-action--primary" href="#contact">Primary</a></span>
+			<a class="owp-button owp-action owp-action--secondary" href="#contact">Secondary</a>
+			<a class="owp-button owp-action owp-action--accent" href="#contact">Accent</a>
+			<a class="owp-button owp-action owp-action--ghost" href="#contact">Ghost</a>
+			<a class="owp-button owp-action owp-action--custom" href="#contact">Custom</a>
+			<a class="owp-button owp-action owp-action--icon" href="#contact">
+				<span class="owp-visually-hidden">Contact us</span>
+				<span class="owp-action__icon" aria-hidden="true"><i class="fas fa-envelope"></i></span>
+			</a>
+			<a class="owp-button owp-action owp-action--text owp-button--icon-before" href="#contact">
+				<span>Icon before text</span>
+				<span class="owp-action__icon" aria-hidden="true"><i class="fas fa-envelope"></i></span>
+			</a>
+			<a class="owp-button owp-action owp-action--text" href="#contact">Text link <span class="owp-arrow" aria-hidden="true">→</span></a>
+		</div>
+	</section>
+
+	<section class="gallery-example" id="owp-service-card">
+		<h2>Service Card</h2>
+		<div class="gallery-preview">
+			<article class="owp-service-card owp-service-card--tint owp-widget">
+				<img class="owp-service-card__image" src="assets/images/cta-team.jpg" alt="" loading="lazy">
+				<div class="owp-service-card__copy">
+					<p class="owp-service-card__tag">Formation &amp; setup</p>
+					<h3 class="owp-widget-title">Business Registration</h3>
+					<p class="owp-service-card__description">Get help with company formation, permits, and government registrations.</p>
+					<a class="owp-action owp-action--text" href="#owp-accordion">Learn more <span aria-hidden="true">→</span></a>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<section class="gallery-example" id="owp-feature-card">
+		<h2>Feature Card</h2>
+		<div class="gallery-preview">
+			<article class="owp-feature-card owp-widget">
+				<span class="owp-feature-card__icon" aria-hidden="true"><i class="fas fa-check"></i></span>
+				<h3 class="owp-widget-title">Clear next steps</h3>
+				<p class="owp-feature-card__description">Know what to prepare and what to expect at each stage.</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="gallery-example" id="owp-info-card">
+		<h2>Info Card</h2>
+		<div class="gallery-preview">
+			<article class="owp-info-card owp-widget">
+				<span class="owp-info-card__icon" aria-hidden="true"><i class="fas fa-star"></i></span>
+				<h3 class="owp-info-card__title owp-widget-title">Planning your setup</h3>
+				<p class="owp-info-card__description">Start by gathering your proposed company name, business activities, and ownership information.</p>
+				<a class="owp-info-card__link" href="#owp-accordion">Read the FAQ</a>
+			</article>
+		</div>
+	</section>
+
+	<section class="gallery-example" id="owp-cta-banner">
+		<h2>CTA Banner</h2>
+		<div class="gallery-preview gallery-cta">
+			<div class="owp-cta-banner owp-cta-banner--split owp-widget">
+				<div class="owp-cta-banner__photo"><img src="assets/images/cta-team.jpg" alt="" loading="lazy"></div>
+				<div class="owp-cta-banner__copy">
+					<span class="owp-cta-banner__eyebrow">Ready to move forward?</span>
+					<h3 class="owp-widget-heading">Build your business<br>with <span>confidence.</span></h3>
+					<p class="owp-cta-banner__description">You focus on your business. FilePino supports the corporate infrastructure behind it.</p>
+					<a class="owp-action owp-action--primary" href="#contact">Talk to Us</a>
+					<p class="owp-cta-banner__note">Let’s find the right support for your business.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="gallery-example" id="owp-accordion">
+		<h2>Accordion / FAQ</h2>
+		<div class="gallery-preview">
+			<div class="owp-accordion owp-widget" data-owp-single>
+				<details name="demo-faq" open>
+					<summary><span class="owp-accordion__question owp-widget-heading">Where do I start?</span><span class="owp-badge">Setup</span><span class="owp-accordion__chevron" aria-hidden="true"></span></summary>
+					<div class="owp-accordion__answer"><p>Start with your business structure, proposed name, and intended activities.</p></div>
+				</details>
+				<details name="demo-faq">
+					<summary><span class="owp-accordion__question owp-widget-heading">Can I get help after registration?</span><span class="owp-accordion__chevron" aria-hidden="true"></span></summary>
+					<div class="owp-accordion__answer"><p>Yes. Support can continue with operations, reporting, and compliance.</p></div>
+				</details>
+			</div>
+		</div>
+	</section>
+
+	<section class="gallery-example" id="owp-footer">
+		<h2>Universal Footer</h2>
+		<div class="gallery-preview gallery-preview--flush">
+			<footer class="owp-footer owp-widget">
+				<div class="owp-footer__grid">
+					<div class="owp-footer__brand"><p class="owp-widget-heading">FilePino</p><p>Support for every stage of your Philippine business.</p></div>
+					<nav aria-label="Example company links">
+						<h3 class="owp-widget-heading">Company</h3>
+						<ul><li><a href="#owp-service-card">Services</a></li><li><a href="#owp-accordion">FAQ</a></li></ul>
+					</nav>
+					<div><h3 class="owp-widget-heading">Contact</h3><address>Metro Manila, Philippines</address></div>
+					<div><h3 class="owp-widget-heading">Get in Touch</h3><a class="owp-action owp-action--primary" href="#contact">Contact Us</a></div>
+				</div>
+				<div class="owp-footer__bottom">© <span id="demo-year">2026</span> FilePino</div>
+			</footer>
+		</div>
+	</section>
+	</div>
+	<aside class="gallery-contact" id="contact" aria-label="Demo contact">
+		<p>Contact buttons link here for the demo. Set their destination in Elementor.</p>
+		<a href="#top">Back to the widget list</a>
+	</aside>
+</main>
+<script>document.getElementById('demo-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

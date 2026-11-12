@@ -107,7 +107,7 @@ abstract class BaseWidget extends Widget_Base {
 		) );
 	}
 
-	protected function link( $label, $link, $class = '', $arrow = false, $icon = array(), $current = false ) {
+	protected function link( $label, $link, $class = '', $arrow = false, $icon = array(), $current = false, $show_icon_label = false ) {
 		$url = esc_url( $link['url'] ?? '' );
 		if ( '' === $url || '' === trim( $label ) ) {
 			return;
@@ -120,8 +120,8 @@ abstract class BaseWidget extends Widget_Base {
 			<?php if ( $rel ) : ?> rel="<?php echo esc_attr( $rel ); ?>"<?php endif; ?>
 			<?php if ( $current ) : ?> aria-current="page"<?php endif; ?>>
 			<?php if ( ! empty( $icon['value'] ) ) : ?>
-				<span class="owp-visually-hidden"><?php echo esc_html( $label ); ?></span>
-				<span aria-hidden="true"><?php \Elementor\Icons_Manager::render_icon( $icon, array( 'aria-hidden' => 'true' ) ); ?></span>
+				<span<?php if ( ! $show_icon_label ) : ?> class="owp-visually-hidden"<?php endif; ?>><?php echo esc_html( $label ); ?></span>
+				<span class="owp-action__icon" aria-hidden="true"><?php \Elementor\Icons_Manager::render_icon( $icon, array( 'aria-hidden' => 'true' ) ); ?></span>
 			<?php else : ?>
 				<?php echo esc_html( $label ); ?>
 			<?php endif; ?>

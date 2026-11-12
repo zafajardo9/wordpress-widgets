@@ -3,7 +3,7 @@
  * Plugin Name:       Omni Widget Pack for Elementor
  * Plugin URI:        https://github.com/omni-widget-pack/omni-widget-pack
  * Description:       One plugin, many widgets. A growing pack of custom Elementor widgets and components you can reuse on any site.
- * Version:           0.2.1
+ * Version:           0.2.3
  * Requires at least: 6.2
  * Requires PHP:      7.4
  * Requires Plugins:  elementor
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'OWP_VERSION', '0.2.1' );
+define( 'OWP_VERSION', '0.2.3' );
 define( 'OWP_FILE', __FILE__ );
 define( 'OWP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'OWP_URL', plugin_dir_url( __FILE__ ) );

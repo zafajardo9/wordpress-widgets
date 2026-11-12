@@ -5,7 +5,7 @@ Requires at least: 6.2
 Tested up to: 6.8
 Requires PHP: 7.4
 Requires Plugins: elementor
-Stable tag: 0.2.1
+Stable tag: 0.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,8 @@ Included widgets:
 * Navigation Bar with a mobile drawer and Universal Footer with a dynamic copyright year.
 * Hero Section with service milestones and CTA Banner with a cover photo and badge.
 * Service Card, Feature Card, and the original Info Card.
-* Accordion / FAQ with optional structured data and a standalone Button with four variants.
+* Accordion / FAQ with optional structured data and a standalone Button with seven variants.
+* Our Team Carousel with selectable cards, portraits, and editable profiles.
 
 Every widget is a self-contained component with Elementor content and style controls.
 The pack is designed to grow: new widgets are added to the same plugin rather than
@@ -52,6 +53,14 @@ Yes. Widgets are provided by this plugin, not by a theme, so switching themes ke
 available.
 
 == Changelog ==
+
+= 0.2.3 =
+* Adds shared button colors and the Ghost and Custom variants.
+* Adds Service Milestones and more Team Carousel style controls.
+
+= 0.2.2 =
+* Adds the Our Team Carousel and the WordPress widget catalog with an HTML demo.
+* Updates the brand palette and adds separate Button background and text color controls.
 
 = 0.2.1 =
 * Keeps dedicated header sections sticky and preserves active navigation on campaign URLs.

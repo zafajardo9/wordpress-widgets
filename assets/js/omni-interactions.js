@@ -12,6 +12,33 @@
 	}
 
 	document.addEventListener('click', (event) => {
+		const teamControl = event.target.closest('.owp-team__card, [data-owp-team-step]');
+		if (teamControl) {
+			const team = teamControl.closest('.owp-team');
+			const track = team.querySelector('.owp-team__track');
+			const cards = Array.from(track.querySelectorAll('.owp-team__card'));
+			const current = cards.findIndex((card) => card.getAttribute('aria-pressed') === 'true');
+			const step = Number(teamControl.dataset.owpTeamStep);
+			const selected = step ? cards[(current + step + cards.length) % cards.length] : teamControl;
+
+			cards.forEach((card) => {
+				const active = card === selected;
+				card.setAttribute('aria-pressed', String(active));
+				document.getElementById(card.getAttribute('aria-controls')).hidden = !active;
+			});
+
+			const cardBounds = selected.getBoundingClientRect();
+			const trackBounds = track.getBoundingClientRect();
+			const offset = cardBounds.left < trackBounds.left
+				? cardBounds.left - trackBounds.left
+				: Math.max(0, cardBounds.right - trackBounds.right);
+			if (offset) {
+				const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				track.scrollBy({ left: offset, behavior: reducedMotion ? 'auto' : 'smooth' });
+			}
+			return;
+		}
+
 		const trigger = event.target.closest('.owp-navbar__open');
 		if (trigger) {
 			const drawer = document.getElementById(trigger.getAttribute('aria-controls'));

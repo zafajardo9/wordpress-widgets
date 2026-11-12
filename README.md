@@ -36,20 +36,36 @@ typography.
 
 For distribution, zip the repository root (it already contains the plugin headers).
 
+## Previewing the widgets
+
+Open `demo.html` in a browser from the plugin folder to see sample content for all twelve
+widgets. In WordPress, open **Omni Widgets** in the admin sidebar to see which widgets
+are available in Elementor and open the same demo.
+
 ## Current widgets
 
 | Widget | Slug | Description |
 | --- | --- | --- |
 | Site Container | `owp-container` | Nested layout shell with responsive gutters and shared typography. |
-| Button | `owp-button` | Yellow, blue, red, and arrow-link variants. |
+| Button | `owp-button` | Primary, Secondary, Accent, Ghost, Text Link, Custom, and Icon Only variants. |
 | Navigation Bar | `owp-navbar` | Brand, navigation, action, and responsive menu drawer. |
 | Universal Footer | `owp-footer` | Four columns, contact details, social links, and an automatic copyright year. |
 | Hero Section | `owp-hero` | Headline, two actions, and optional service milestones. |
+| Service Milestones | `owp-service-milestones` | Glowing connector, white-bordered markers, and editable labels and icons. |
 | CTA Banner | `owp-cta-banner` | Cover photo, badge, highlighted heading, and action. |
 | Service Card | `owp-service-card` | Thumbnail, title, tag, description, and action. |
 | Feature Card | `owp-feature-card` | Icon, title, and description with a bottom divider. |
 | Accordion / FAQ | `owp-accordion` | Single or multiple expansion and optional FAQ JSON-LD. |
+| Our Team Carousel | `owp-team-carousel` | Selectable team cards with a featured portrait and rich-text profile. |
 | Info Card | `owp-info-card` | Icon, title, description, and optional link. |
+
+## Shared button styles
+
+In WordPress, open **Omni Widgets → Button Styles** to set the shared background
+and text colors. Clear a field to restore the preset. In Elementor, select a
+variant under the Button widget's **Content** tab. **Style → Button** overrides
+colors and radius for the selected widget. The Custom variant starts with
+Primary's colors and supports its own overrides.
 
 ## Using Site Container
 

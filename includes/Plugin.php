@@ -46,10 +46,12 @@ final class Plugin {
 		Widgets\Navbar::class,
 		Widgets\Footer::class,
 		Widgets\Hero::class,
+		Widgets\ServiceMilestones::class,
 		Widgets\CtaBanner::class,
 		Widgets\ServiceCard::class,
 		Widgets\FeatureCard::class,
 		Widgets\Accordion::class,
+		Widgets\TeamCarousel::class,
 		Widgets\InfoCard::class,
 		Widgets\LegacyInfoCard::class,
 	);
@@ -84,6 +86,8 @@ final class Plugin {
 		add_action( 'elementor/frontend/after_register_styles', array( $this, 'register_styles' ) );
 		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'register_scripts' ) );
 		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'enqueue_editor_script' ) );
+		add_action( 'admin_menu', array( $this, 'register_widget_catalog' ) );
+		add_action( 'admin_init', array( ButtonStyles::class, 'register_setting' ) );
 		add_action( 'admin_notices', array( $this, 'render_requirements_notice' ) );
 	}
 
@@ -142,6 +146,7 @@ final class Plugin {
 			array(),
 			OWP_VERSION
 		);
+		ButtonStyles::add_styles();
 	}
 
 	public function register_scripts() {
@@ -171,6 +176,71 @@ final class Plugin {
 			&& version_compare( ELEMENTOR_VERSION, '3.16.0', '>=' )
 			&& \Elementor\Plugin::$instance->modules_manager->get_modules( 'nested-elements' )
 			&& class_exists( \Elementor\Modules\NestedElements\Base\Widget_Nested_Base::class );
+	}
+
+	public function register_widget_catalog() {
+		add_menu_page(
+			__( 'Omni Widget Pack', 'omni-widget-pack' ),
+			__( 'Omni Widgets', 'omni-widget-pack' ),
+			'edit_posts',
+			self::CATEGORY,
+			array( $this, 'render_widget_catalog' ),
+			'dashicons-screenoptions'
+		);
+	}
+
+	public function render_widget_catalog() {
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_die( esc_html__( 'You do not have permission to view this page.', 'omni-widget-pack' ) );
+		}
+
+		$widgets = array();
+		$compatible = $this->is_elementor_compatible();
+		if ( $compatible ) {
+			foreach ( \Elementor\Plugin::$instance->widgets_manager->get_widget_types() as $widget ) {
+				if ( in_array( self::CATEGORY, $widget->get_categories(), true ) && $widget->show_in_panel() ) {
+					$widgets[ $widget->get_name() ] = $widget->get_title();
+				}
+			}
+			asort( $widgets, SORT_NATURAL | SORT_FLAG_CASE );
+		}
+		?>
+		<div class="wrap">
+			<h1><?php esc_html_e( 'Omni Widget Pack', 'omni-widget-pack' ); ?></h1>
+			<p><?php esc_html_e( 'In the Elementor editor, find these widgets under Omni Widget Pack.', 'omni-widget-pack' ); ?></p>
+			<p><a class="button button-primary" href="<?php echo esc_url( OWP_URL . 'demo.html' ); ?>"><?php esc_html_e( 'Open widget demo', 'omni-widget-pack' ); ?></a></p>
+			<?php if ( $compatible ) : ?>
+				<table class="widefat striped">
+					<thead><tr>
+						<th scope="col"><?php esc_html_e( 'Widget', 'omni-widget-pack' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Elementor ID', 'omni-widget-pack' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Status', 'omni-widget-pack' ); ?></th>
+					</tr></thead>
+					<tbody>
+						<?php foreach ( $widgets as $slug => $title ) : ?>
+							<tr>
+								<th scope="row"><?php echo esc_html( $title ); ?></th>
+								<td><code><?php echo esc_html( $slug ); ?></code></td>
+								<td><?php esc_html_e( 'Available', 'omni-widget-pack' ); ?></td>
+							</tr>
+						<?php endforeach; ?>
+						<?php if ( ! isset( $widgets['owp-container'] ) ) : ?>
+							<tr>
+								<th scope="row"><?php esc_html_e( 'Site Container', 'omni-widget-pack' ); ?></th>
+								<td><code>owp-container</code></td>
+								<td><?php esc_html_e( 'Requires Elementor 3.16+ with Flexbox Containers and Nested Elements enabled.', 'omni-widget-pack' ); ?></td>
+							</tr>
+						<?php endif; ?>
+					</tbody>
+				</table>
+			<?php else : ?>
+				<p><?php esc_html_e( 'Activate Elementor 3.5 or later to see the widgets available in your editor. The HTML demo is available now.', 'omni-widget-pack' ); ?></p>
+			<?php endif; ?>
+			<?php if ( current_user_can( 'manage_options' ) ) : ?>
+				<?php ButtonStyles::render_settings(); ?>
+			<?php endif; ?>
+		</div>
+		<?php
 	}
 
 	/**
