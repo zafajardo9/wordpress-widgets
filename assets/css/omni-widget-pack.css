@@ -17,6 +17,7 @@
 	box-sizing: border-box;
 	padding: var(--owp-block-padding) var(--owp-gutter);
 	background: var(--owp-white);
+	color: var(--owp-text);
 	line-height: var(--owp-base-line-height, inherit);
 }
 
@@ -244,8 +245,15 @@ a.owp-action--text:focus-visible {
 	display: none;
 }
 
-.owp-navbar-sticky-yes,
-.elementor-location-header:has(.owp-navbar-sticky-yes) {
+.owp-navbar-sticky-yes {
+	position: sticky;
+	top: var(--wp-admin--admin-bar--height, 0px);
+	z-index: 20;
+}
+
+/* A section dedicated to the header must stick beyond the end of its own container. */
+.elementor-location-header:has(.owp-navbar-sticky-yes),
+.elementor > :is(.e-con, .elementor-section):has(.owp-navbar-sticky-yes):not(:has(.elementor-widget:not(.elementor-widget-owp-navbar, .elementor-widget-owp-container))) {
 	position: sticky;
 	top: var(--wp-admin--admin-bar--height, 0px);
 	z-index: 20;

@@ -19,9 +19,9 @@ The visual system is constrained to four primary tokens:
 
 ---
 
-## Codebase Audit: Current State vs. Required Needs
+## Codebase Audit Before Implementation
 
-A line-by-line review of the existing repository reveals that **the current codebase does not yet implement what you need**. It is strictly a scaffold:
+This table records the original scaffold before the Omni suite was implemented. See the [current widget inventory](README.md#current-widgets) for the implemented components.
 
 | Component / Requirement | Status in Codebase | Findings & Technical Gap |
 | :--- | :--- | :--- |

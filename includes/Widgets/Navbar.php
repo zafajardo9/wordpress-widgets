@@ -49,19 +49,30 @@ final class Navbar extends BaseWidget {
 	}
 
 	private function is_current_link( $url ) {
-		if ( '' === $url || '#' === $url[0] || wp_parse_url( $url, PHP_URL_FRAGMENT ) ) {
+		$link = wp_parse_url( $url );
+		if ( '' === $url || ! $link || isset( $link['fragment'] )
+			|| ( isset( $link['scheme'] ) && ! in_array( strtolower( $link['scheme'] ), array( 'http', 'https' ), true ) ) ) {
 			return false;
 		}
-		$host = wp_parse_url( $url, PHP_URL_HOST );
-		if ( $host && strtolower( $host ) !== strtolower( wp_parse_url( home_url(), PHP_URL_HOST ) ) ) {
+		if ( isset( $link['host'] ) && 0 !== strcasecmp( $link['host'], wp_parse_url( home_url(), PHP_URL_HOST ) ) ) {
 			return false;
 		}
-		// Menu links may include a query (for example, on sites using plain permalinks).
-		$request = wp_unslash( $_SERVER['REQUEST_URI'] ?? '/' );
-		$path = wp_parse_url( $url, PHP_URL_PATH ) ?? '/';
-		$query = wp_parse_url( $url, PHP_URL_QUERY );
-		return untrailingslashit( $path ) === untrailingslashit( wp_parse_url( $request, PHP_URL_PATH ) ?? '/' )
-			&& ( $query ?? '' ) === ( wp_parse_url( $request, PHP_URL_QUERY ) ?? '' );
+		$request = wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '/' ) );
+		$request_path = $request['path'] ?? '/';
+		$link_path = $link['path'] ?? ( isset( $link['host'] ) ? '/' : $request_path );
+		return untrailingslashit( $link_path ) === untrailingslashit( $request_path )
+			&& $this->navigation_query( $link['query'] ?? '' ) === $this->navigation_query( $request['query'] ?? '' );
+	}
+
+	private function navigation_query( $query ) {
+		wp_parse_str( $query, $parameters );
+		foreach ( array_keys( $parameters ) as $key ) {
+			if ( 0 === stripos( $key, 'utm_' ) ) {
+				unset( $parameters[ $key ] );
+			}
+		}
+		ksort( $parameters );
+		return $parameters;
 	}
 
 	private function render_links( $settings ) {
@@ -82,7 +93,7 @@ final class Navbar extends BaseWidget {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		$brand = $settings['brand'] ?: get_bloginfo( 'name' );
-		$dialog_id = wp_unique_id( 'owp-menu-' );
+		$dialog_id = 'owp-menu-' . wp_generate_uuid4();
 		$menu_label = esc_attr__( 'Main menu', 'omni-widget-pack' );
 		?>
 		<header class="owp-navbar owp-widget">

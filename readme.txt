@@ -5,7 +5,7 @@ Requires at least: 6.2
 Tested up to: 6.8
 Requires PHP: 7.4
 Requires Plugins: elementor
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,6 +52,11 @@ Yes. Widgets are provided by this plugin, not by a theme, so switching themes ke
 available.
 
 == Changelog ==
+
+= 0.2.1 =
+* Keeps dedicated header sections sticky and preserves active navigation on campaign URLs.
+* Restores readable text in light containers nested within blue containers.
+* Keeps mobile menus and FAQ groups independent when widgets render separately.
 
 = 0.2.0 =
 * Adds the Omni layout, navigation, conversion, card, button, and FAQ widgets.

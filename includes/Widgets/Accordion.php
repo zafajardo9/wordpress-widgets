@@ -80,7 +80,7 @@ final class Accordion extends BaseWidget {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		$single = 'single' === $settings['expand_mode'];
-		$group = wp_unique_id( 'owp-faq-' );
+		$group = $single ? 'owp-faq-' . wp_generate_uuid4() : '';
 		$questions = array();
 		?>
 		<div class="owp-accordion owp-widget"<?php if ( $single ) : ?> data-owp-single<?php endif; ?>>
