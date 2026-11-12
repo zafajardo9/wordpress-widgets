@@ -730,8 +730,12 @@ a.owp-action--icon {
 	line-height: 1.35;
 }
 
-.owp-cta-banner .owp-widget-heading span {
+.owp-cta-banner__highlight {
 	color: var(--owp-yellow);
+}
+
+.owp-cta-banner :is(.owp-cta-banner__description, .owp-cta-banner__note) > * + * {
+	margin-block-start: 0.65em;
 }
 
 .owp-cta-banner__description {

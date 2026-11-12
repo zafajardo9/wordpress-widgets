@@ -1,0 +1,172 @@
+.demo-hero {
+	position: relative;
+	display: grid;
+	grid-template-rows: 1fr auto;
+	overflow: hidden;
+	isolation: isolate;
+	aspect-ratio: 72 / 41;
+	background: linear-gradient(rgb(9 27 44 / 22%), rgb(9 27 44 / 22%)), url("hero/skyline.png") center / cover no-repeat;
+	color: #333;
+	font: 400 1rem/1.25 Poppins, system-ui, sans-serif;
+}
+
+.demo-hero__copy {
+	gap: clamp(0.875rem, 1.65vw, 1.375rem);
+	align-content: start;
+	padding: 10.28% 5.56% 0;
+}
+
+.demo-hero .demo-hero__heading {
+	max-width: 15em;
+	font: 600 clamp(1.75rem, 3.15vw, 2.5rem)/1.25 Poppins, system-ui, sans-serif;
+}
+
+.demo-hero__description {
+	max-width: 28.25em;
+	font-size: clamp(0.875rem, 1.25vw, 1.0625rem);
+}
+
+.demo-hero__actions {
+	gap: clamp(0.75rem, 1.7vw, 1.5rem);
+	margin-top: .65rem;
+}
+
+.demo-hero__actions .owp-action--primary {
+	min-height: 48px;
+	padding-inline: 1.5rem;
+	font-size: 0.9375rem;
+}
+
+.demo-hero__actions .owp-action--text {
+	--owp-action-fg: #244d69;
+	font-size: 0.875rem;
+}
+
+.demo-hero__journey {
+	padding: 4.5% 4.5% 2%;
+	background: linear-gradient(transparent, rgb(5 17 31 / 45%) 45%, rgb(5 17 31 / 85%));
+}
+
+.demo-hero__journey .owp-milestones {
+	--owp-milestone-size: clamp(38px, 4vw, 54px);
+}
+
+.demo-hero__journey .owp-milestones__marker img {
+	width: 54%;
+	height: 54%;
+}
+
+.demo-hero__journey .owp-milestones__label {
+	max-width: 150px;
+	font-size: clamp(0.625rem, 1vw, 0.8125rem);
+	font-weight: 600;
+}
+
+.demo-hero__badge,
+.demo-hero__tagline,
+.demo-hero__art {
+	display: none;
+}
+
+.demo-hero__original {
+	margin-block: 0.75rem 1.5rem;
+}
+
+.demo-hero__original > summary {
+	width: fit-content;
+	padding-block: 0.35rem;
+	cursor: pointer;
+}
+
+@media (max-width: 900px) {
+	.demo-hero {
+		grid-template-rows: auto auto;
+		gap: 44px;
+		aspect-ratio: auto;
+		padding: 32px 24px 48px;
+		background:
+			url("hero/sun-corner.svg") -95px -125px no-repeat,
+			url("hero/sky-sweep.svg") -120px 620px no-repeat,
+			url("hero/gold-edge.svg") calc(100% + 18px) 450px no-repeat,
+			radial-gradient(ellipse at 39% 48%, #d8f1fb, #ecf7fc 55%, #fff);
+	}
+
+	.demo-hero__copy {
+		gap: 22px;
+		padding: 0;
+	}
+
+	.demo-hero .demo-hero__heading {
+		max-width: none;
+		font-size: 31px;
+	}
+
+	.demo-hero__heading-intro {
+		display: block;
+	}
+
+	.demo-hero__description {
+		max-width: none;
+		font-size: 14px;
+	}
+
+	.demo-hero__badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 8px 14px;
+		border-radius: 30px;
+		background: white;
+		color: #244d69;
+		font-size: 8px;
+		text-transform: uppercase;
+	}
+
+	.demo-hero__badge span {
+		color: #428db6;
+		font-size: 14px;
+	}
+
+	.demo-hero__tagline {
+		display: block;
+		color: #327da7;
+		font-size: 17px;
+	}
+
+	.demo-hero__actions {
+		margin: 0;
+	}
+
+	.demo-hero__journey,
+	.demo-hero__actions .owp-action--text {
+		display: none;
+	}
+
+	.demo-hero__art {
+		position: relative;
+		display: block;
+		justify-self: center;
+		width: min(100%, 520px);
+		aspect-ratio: 342 / 338;
+		background:
+			url("hero/blue-border.svg") 45.5% 41.7% / 93.53% auto no-repeat,
+			url("hero/gold-slash.svg") 100% 100% / 93.53% auto no-repeat,
+			url("hero/aqua-backing.svg") left top / 93.53% auto no-repeat;
+	}
+
+	.demo-hero__art img {
+		position: absolute;
+		top: 1.49%;
+		left: 3.82%;
+		width: 88.23%;
+		height: 87.5%;
+	}
+}
+
+@media (max-width: 600px) {
+	#owp-hero .demo-hero__preview {
+		margin-inline: -1rem;
+		border-inline: 0;
+		border-radius: 0;
+	}
+}
