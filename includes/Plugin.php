@@ -2,10 +2,10 @@
 /**
  * Plugin bootstrap: requirements, widget registry, and Elementor hooks.
  *
- * @package DuranWidgetPack
+ * @package OmniWidgetPack
  */
 
-namespace Duran\WidgetPack;
+namespace Omni\WidgetPack;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,12 +25,13 @@ final class Plugin {
 	/**
 	 * Elementor category that groups every widget in this pack.
 	 */
-	const CATEGORY = 'duran-widget-pack';
+	const CATEGORY = 'omni-widget-pack';
 
 	/**
 	 * Shared frontend stylesheet handle.
 	 */
-	const STYLE_HANDLE = 'duran-widget-pack';
+	const STYLE_HANDLE = 'omni-widget-pack';
+	const INTERACTION_HANDLE = 'omni-widget-pack-interactions';
 
 	/**
 	 * The widget registry.
@@ -41,7 +42,16 @@ final class Plugin {
 	 * @var string[]
 	 */
 	private $widgets = array(
+		Widgets\Button::class,
+		Widgets\Navbar::class,
+		Widgets\Footer::class,
+		Widgets\Hero::class,
+		Widgets\CtaBanner::class,
+		Widgets\ServiceCard::class,
+		Widgets\FeatureCard::class,
+		Widgets\Accordion::class,
 		Widgets\InfoCard::class,
+		Widgets\LegacyInfoCard::class,
 	);
 
 	/**
@@ -72,6 +82,8 @@ final class Plugin {
 		add_action( 'elementor/widgets/register', array( $this, 'register_widgets' ) );
 		add_action( 'elementor/elements/categories_registered', array( $this, 'register_category' ) );
 		add_action( 'elementor/frontend/after_register_styles', array( $this, 'register_styles' ) );
+		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'register_scripts' ) );
+		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'enqueue_editor_script' ) );
 		add_action( 'admin_notices', array( $this, 'render_requirements_notice' ) );
 	}
 
@@ -80,9 +92,9 @@ final class Plugin {
 	 */
 	public function load_textdomain() {
 		load_plugin_textdomain(
-			'duran-widget-pack',
+			'omni-widget-pack',
 			false,
-			dirname( plugin_basename( DURAN_WP_FILE ) ) . '/languages'
+			dirname( plugin_basename( OWP_FILE ) ) . '/languages'
 		);
 	}
 
@@ -94,6 +106,10 @@ final class Plugin {
 	public function register_widgets( $widgets_manager ) {
 		if ( ! $this->is_elementor_compatible() ) {
 			return;
+		}
+
+		if ( $this->supports_nested_elements() ) {
+			$widgets_manager->register( new Widgets\SiteContainer() );
 		}
 
 		foreach ( $this->widgets as $widget_class ) {
@@ -110,7 +126,7 @@ final class Plugin {
 		$elements_manager->add_category(
 			self::CATEGORY,
 			array(
-				'title' => esc_html__( 'Duran Widget Pack', 'duran-widget-pack' ),
+				'title' => esc_html__( 'Omni Widget Pack', 'omni-widget-pack' ),
 				'icon'  => 'eicon-plug',
 			)
 		);
@@ -122,10 +138,39 @@ final class Plugin {
 	public function register_styles() {
 		wp_register_style(
 			self::STYLE_HANDLE,
-			DURAN_WP_URL . 'assets/css/duran-widget-pack.css',
+			OWP_URL . 'assets/css/omni-widget-pack.css',
 			array(),
-			DURAN_WP_VERSION
+			OWP_VERSION
 		);
+	}
+
+	public function register_scripts() {
+		wp_register_script(
+			self::INTERACTION_HANDLE,
+			OWP_URL . 'assets/js/omni-interactions.js',
+			array( 'elementor-frontend' ),
+			OWP_VERSION,
+			true
+		);
+	}
+
+	public function enqueue_editor_script() {
+		if ( $this->supports_nested_elements() ) {
+			wp_enqueue_script(
+				'omni-widget-pack-editor',
+				OWP_URL . 'assets/js/omni-editor.js',
+				array( 'elementor-editor', 'nested-elements' ),
+				OWP_VERSION,
+				true
+			);
+		}
+	}
+
+	private function supports_nested_elements() {
+		return $this->is_elementor_compatible()
+			&& version_compare( ELEMENTOR_VERSION, '3.16.0', '>=' )
+			&& \Elementor\Plugin::$instance->modules_manager->get_modules( 'nested-elements' )
+			&& class_exists( \Elementor\Modules\NestedElements\Base\Widget_Nested_Base::class );
 	}
 
 	/**
@@ -139,15 +184,15 @@ final class Plugin {
 		if ( defined( 'ELEMENTOR_VERSION' ) ) {
 			$message = sprintf(
 				/* translators: 1: plugin name, 2: required Elementor version. */
-				esc_html__( '%1$s requires Elementor %2$s or newer. Please update Elementor to use this widget pack.', 'duran-widget-pack' ),
-				'<strong>Duran Widget Pack</strong>',
+				esc_html__( '%1$s requires Elementor %2$s or newer. Please update Elementor to use this widget pack.', 'omni-widget-pack' ),
+				'<strong>Omni Widget Pack</strong>',
 				esc_html( self::MIN_ELEMENTOR_VERSION )
 			);
 		} else {
 			$message = sprintf(
 				/* translators: %s: plugin name. */
-				esc_html__( '%s requires Elementor to be installed and activated.', 'duran-widget-pack' ),
-				'<strong>Duran Widget Pack</strong>'
+				esc_html__( '%s requires Elementor to be installed and activated.', 'omni-widget-pack' ),
+				'<strong>Omni Widget Pack</strong>'
 			);
 		}
 

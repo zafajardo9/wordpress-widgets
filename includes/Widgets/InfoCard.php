@@ -4,10 +4,10 @@
  *
  * This widget doubles as the reference implementation for new pack widgets.
  *
- * @package DuranWidgetPack
+ * @package OmniWidgetPack
  */
 
-namespace Duran\WidgetPack\Widgets;
+namespace Omni\WidgetPack\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Background;
@@ -29,7 +29,7 @@ class InfoCard extends BaseWidget {
 	 * @return string
 	 */
 	public function get_name() {
-		return 'duran-info-card';
+		return 'owp-info-card';
 	}
 
 	/**
@@ -38,7 +38,7 @@ class InfoCard extends BaseWidget {
 	 * @return string
 	 */
 	public function get_title() {
-		return esc_html__( 'Info Card', 'duran-widget-pack' );
+		return esc_html__( 'Info Card', 'omni-widget-pack' );
 	}
 
 	/**
@@ -74,7 +74,7 @@ class InfoCard extends BaseWidget {
 		$this->start_controls_section(
 			'section_content',
 			array(
-				'label' => esc_html__( 'Content', 'duran-widget-pack' ),
+				'label' => esc_html__( 'Content', 'omni-widget-pack' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -82,7 +82,7 @@ class InfoCard extends BaseWidget {
 		$this->add_control(
 			'icon',
 			array(
-				'label'   => esc_html__( 'Icon', 'duran-widget-pack' ),
+				'label'   => esc_html__( 'Icon', 'omni-widget-pack' ),
 				'type'    => Controls_Manager::ICONS,
 				'default' => array(
 					'value'   => 'fas fa-star',
@@ -94,9 +94,9 @@ class InfoCard extends BaseWidget {
 		$this->add_control(
 			'title',
 			array(
-				'label'       => esc_html__( 'Title', 'duran-widget-pack' ),
+				'label'       => esc_html__( 'Title', 'omni-widget-pack' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Card title', 'duran-widget-pack' ),
+				'default'     => esc_html__( 'Card title', 'omni-widget-pack' ),
 				'label_block' => true,
 			)
 		);
@@ -104,9 +104,9 @@ class InfoCard extends BaseWidget {
 		$this->add_control(
 			'description',
 			array(
-				'label'   => esc_html__( 'Description', 'duran-widget-pack' ),
+				'label'   => esc_html__( 'Description', 'omni-widget-pack' ),
 				'type'    => Controls_Manager::TEXTAREA,
-				'default' => esc_html__( 'Describe this card in a sentence or two.', 'duran-widget-pack' ),
+				'default' => esc_html__( 'Describe this card in a sentence or two.', 'omni-widget-pack' ),
 				'rows'    => 5,
 			)
 		);
@@ -114,7 +114,7 @@ class InfoCard extends BaseWidget {
 		$this->add_control(
 			'link',
 			array(
-				'label'       => esc_html__( 'Link', 'duran-widget-pack' ),
+				'label'       => esc_html__( 'Link', 'omni-widget-pack' ),
 				'type'        => Controls_Manager::URL,
 				'placeholder' => 'https://example.com',
 				'options'     => array( 'url', 'is_external', 'nofollow' ),
@@ -125,9 +125,9 @@ class InfoCard extends BaseWidget {
 		$this->add_control(
 			'link_text',
 			array(
-				'label'     => esc_html__( 'Link text', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Link text', 'omni-widget-pack' ),
 				'type'      => Controls_Manager::TEXT,
-				'default'   => esc_html__( 'Learn more', 'duran-widget-pack' ),
+				'default'   => esc_html__( 'Learn more', 'omni-widget-pack' ),
 				'condition' => array( 'link[url]!' => '' ),
 			)
 		);
@@ -153,7 +153,7 @@ class InfoCard extends BaseWidget {
 		$this->start_controls_section(
 			'section_card_style',
 			array(
-				'label' => esc_html__( 'Card', 'duran-widget-pack' ),
+				'label' => esc_html__( 'Card', 'omni-widget-pack' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -163,18 +163,18 @@ class InfoCard extends BaseWidget {
 			array(
 				'name'     => 'card_background',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .duran-info-card',
+				'selector' => '{{WRAPPER}} .owp-info-card',
 			)
 		);
 
 		$this->add_responsive_control(
 			'card_padding',
 			array(
-				'label'      => esc_html__( 'Padding', 'duran-widget-pack' ),
+				'label'      => esc_html__( 'Padding', 'omni-widget-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em', 'rem', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .duran-info-card' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .owp-info-card' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -183,18 +183,18 @@ class InfoCard extends BaseWidget {
 			Group_Control_Border::get_type(),
 			array(
 				'name'     => 'card_border',
-				'selector' => '{{WRAPPER}} .duran-info-card',
+				'selector' => '{{WRAPPER}} .owp-info-card',
 			)
 		);
 
 		$this->add_responsive_control(
 			'card_border_radius',
 			array(
-				'label'      => esc_html__( 'Border radius', 'duran-widget-pack' ),
+				'label'      => esc_html__( 'Border radius', 'omni-widget-pack' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .duran-info-card' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .owp-info-card' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -203,7 +203,7 @@ class InfoCard extends BaseWidget {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'card_box_shadow',
-				'selector' => '{{WRAPPER}} .duran-info-card',
+				'selector' => '{{WRAPPER}} .owp-info-card',
 			)
 		);
 
@@ -217,7 +217,7 @@ class InfoCard extends BaseWidget {
 		$this->start_controls_section(
 			'section_icon_style',
 			array(
-				'label'     => esc_html__( 'Icon', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Icon', 'omni-widget-pack' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array( 'icon[value]!' => '' ),
 			)
@@ -226,11 +226,11 @@ class InfoCard extends BaseWidget {
 		$this->add_control(
 			'icon_color',
 			array(
-				'label'     => esc_html__( 'Color', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Color', 'omni-widget-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .duran-info-card__icon'     => 'color: {{VALUE}};',
-					'{{WRAPPER}} .duran-info-card__icon svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .owp-info-card__icon'     => 'color: {{VALUE}};',
+					'{{WRAPPER}} .owp-info-card__icon svg' => 'fill: {{VALUE}};',
 				),
 			)
 		);
@@ -238,7 +238,7 @@ class InfoCard extends BaseWidget {
 		$this->add_responsive_control(
 			'icon_size',
 			array(
-				'label'     => esc_html__( 'Size', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Size', 'omni-widget-pack' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => array(
 					'px' => array(
@@ -247,8 +247,8 @@ class InfoCard extends BaseWidget {
 					),
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .duran-info-card__icon'     => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .duran-info-card__icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .owp-info-card__icon'     => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .owp-info-card__icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -263,7 +263,7 @@ class InfoCard extends BaseWidget {
 		$this->start_controls_section(
 			'section_title_style',
 			array(
-				'label'     => esc_html__( 'Title', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Title', 'omni-widget-pack' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array( 'title!' => '' ),
 			)
@@ -272,10 +272,10 @@ class InfoCard extends BaseWidget {
 		$this->add_control(
 			'title_color',
 			array(
-				'label'     => esc_html__( 'Color', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Color', 'omni-widget-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .duran-info-card__title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .owp-info-card__title' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -284,7 +284,7 @@ class InfoCard extends BaseWidget {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'title_typography',
-				'selector' => '{{WRAPPER}} .duran-info-card__title',
+				'selector' => '{{WRAPPER}} .owp-info-card__title',
 			)
 		);
 
@@ -298,7 +298,7 @@ class InfoCard extends BaseWidget {
 		$this->start_controls_section(
 			'section_description_style',
 			array(
-				'label'     => esc_html__( 'Description', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Description', 'omni-widget-pack' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array( 'description!' => '' ),
 			)
@@ -307,10 +307,10 @@ class InfoCard extends BaseWidget {
 		$this->add_control(
 			'description_color',
 			array(
-				'label'     => esc_html__( 'Color', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Color', 'omni-widget-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .duran-info-card__description' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .owp-info-card__description' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -319,7 +319,7 @@ class InfoCard extends BaseWidget {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'description_typography',
-				'selector' => '{{WRAPPER}} .duran-info-card__description',
+				'selector' => '{{WRAPPER}} .owp-info-card__description',
 			)
 		);
 
@@ -333,7 +333,7 @@ class InfoCard extends BaseWidget {
 		$this->start_controls_section(
 			'section_link_style',
 			array(
-				'label'     => esc_html__( 'Link', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Link', 'omni-widget-pack' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array( 'link[url]!' => '' ),
 			)
@@ -344,17 +344,17 @@ class InfoCard extends BaseWidget {
 		$this->start_controls_tab(
 			'link_colors_normal',
 			array(
-				'label' => esc_html__( 'Normal', 'duran-widget-pack' ),
+				'label' => esc_html__( 'Normal', 'omni-widget-pack' ),
 			)
 		);
 
 		$this->add_control(
 			'link_color',
 			array(
-				'label'     => esc_html__( 'Color', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Color', 'omni-widget-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .duran-info-card__link' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .owp-info-card__link' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -364,17 +364,17 @@ class InfoCard extends BaseWidget {
 		$this->start_controls_tab(
 			'link_colors_hover',
 			array(
-				'label' => esc_html__( 'Hover', 'duran-widget-pack' ),
+				'label' => esc_html__( 'Hover', 'omni-widget-pack' ),
 			)
 		);
 
 		$this->add_control(
 			'link_hover_color',
 			array(
-				'label'     => esc_html__( 'Color', 'duran-widget-pack' ),
+				'label'     => esc_html__( 'Color', 'omni-widget-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .duran-info-card__link:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .owp-info-card__link:hover' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -386,7 +386,7 @@ class InfoCard extends BaseWidget {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'link_typography',
-				'selector' => '{{WRAPPER}} .duran-info-card__link',
+				'selector' => '{{WRAPPER}} .owp-info-card__link',
 			)
 		);
 
@@ -399,28 +399,28 @@ class InfoCard extends BaseWidget {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		$this->add_render_attribute( 'card', 'class', 'duran-info-card' );
+		$this->add_render_attribute( 'card', 'class', array( 'owp-info-card', 'owp-widget' ) );
 
 		$has_link = ! empty( $settings['link']['url'] );
 
 		if ( $has_link ) {
 			$this->add_link_attributes( 'link', $settings['link'] );
-			$this->add_render_attribute( 'link', 'class', 'duran-info-card__link' );
+			$this->add_render_attribute( 'link', 'class', 'owp-info-card__link' );
 		}
 		?>
 		<div <?php $this->print_render_attribute_string( 'card' ); ?>>
 			<?php if ( ! empty( $settings['icon']['value'] ) ) : ?>
-				<span class="duran-info-card__icon" aria-hidden="true">
+				<span class="owp-info-card__icon" aria-hidden="true">
 					<?php Icons_Manager::render_icon( $settings['icon'], array( 'aria-hidden' => 'true' ) ); ?>
 				</span>
 			<?php endif; ?>
 
 			<?php if ( ! empty( $settings['title'] ) ) : ?>
-				<h3 class="duran-info-card__title"><?php echo esc_html( $settings['title'] ); ?></h3>
+				<h3 class="owp-info-card__title owp-widget-title"><?php echo esc_html( $settings['title'] ); ?></h3>
 			<?php endif; ?>
 
 			<?php if ( ! empty( $settings['description'] ) ) : ?>
-				<p class="duran-info-card__description"><?php echo nl2br( esc_html( $settings['description'] ) ); ?></p>
+				<p class="owp-info-card__description"><?php echo nl2br( esc_html( $settings['description'] ) ); ?></p>
 			<?php endif; ?>
 
 			<?php if ( $has_link && ! empty( $settings['link_text'] ) ) : ?>
