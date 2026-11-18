@@ -6,9 +6,9 @@
 	<title>Omni Widget Pack Demo</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@500;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/omni-widget-pack.css">
-	<link rel="stylesheet" href="assets/demo/hero.css">
+	<link rel="stylesheet" href="assets/css/owp-filepino-hero.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css">
 	<script src="assets/js/omni-interactions.js" defer></script>
@@ -27,13 +27,15 @@
 		.gallery-index a { padding: .45rem .75rem; border: 1px solid #d8ded9; border-radius: 999px; background: white; color: #102630; font-size: .875rem; font-weight: 600; text-decoration: none; }
 		.gallery-index a:is(:hover, :focus-visible) { border-color: #102630; }
 		.gallery-example { min-width: 0; scroll-margin-top: 1rem; }
-		.gallery-example > h2 { margin: 0 0 .75rem; font-size: 1.25rem; font-weight: 800; letter-spacing: -.025em; }
+		.gallery-example > h2 { margin-block: 0 .75rem; font-size: 1.25rem; font-weight: 800; letter-spacing: -.025em; }
 		.gallery-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.5rem; padding-block: 1.75rem; border-top: 1px solid #d8ded9; }
 		.gallery-grid > .gallery-example { grid-column: span 6; display: grid; grid-template-rows: auto 1fr; }
 		.gallery-grid > :is(#owp-service-card, #owp-info-card, #owp-feature-card) { grid-column: span 2; }
 		.gallery-grid > :is(#owp-accordion, #owp-button) { grid-column: span 3; }
 		.gallery-preview { padding: clamp(1rem, 2.5vw, 1.75rem); background: var(--owp-white); border: 1px solid #d8ded9; border-radius: 1.125rem; overflow: hidden; }
 		.gallery-preview--flush { padding: 0; }
+		.demo-hero-original { margin-block: .75rem 1.5rem; }
+		.demo-hero-original > summary { width: fit-content; padding-block: .35rem; cursor: pointer; }
 		.gallery-cta { padding: clamp(.5rem, calc(6vw - 1rem), 3rem); background: #f1f8fc; font-family: Poppins, system-ui, sans-serif; }
 		.gallery-milestones { padding: clamp(1.25rem, 4vw, 3.25rem); background: radial-gradient(ellipse at top, #164762, #081d2c 75%); }
 		.gallery-contact { padding-block: 1rem 2.5rem; }
@@ -72,38 +74,38 @@
 	<a class="gallery-brand" href="#top"><span class="gallery-mark" aria-hidden="true">✦</span> Omni Widget Pack</a>
 	<a href="#widget-gallery">Browse widgets</a>
 </header>
-<main class="gallery">
-	<div class="gallery-intro">
+<main>
+	<div class="gallery gallery-intro">
 		<h1>Widget showcase</h1>
 		<p>Explore twelve Elementor widgets, from interactive team profiles to the building blocks of a business website.</p>
 	</div>
 	<section class="gallery-example" id="owp-hero">
-		<h2>Hero Section</h2>
-		<div class="gallery-preview gallery-preview--flush demo-hero__preview">
-			<div class="demo-hero owp-widget">
-				<div class="demo-hero__copy owp-hero__copy">
-					<div class="demo-hero__badge"><span aria-hidden="true">✓</span> Trusted Philippine business support</div>
-					<h3 class="demo-hero__heading"><span class="demo-hero__heading-intro">Your Integrated</span> Business Services Platform</h3>
-					<p class="demo-hero__tagline">Trusted expertise. From formation to growth.</p>
-					<p class="demo-hero__description">Establish your company with confidence. Get connected support for registration, operations, and compliance—so you can focus on growing your Philippine business.</p>
-					<div class="demo-hero__actions owp-actions">
+		<h2 class="gallery">Hero Section</h2>
+		<div class="owp-filepino-hero-shell">
+			<div class="owp-filepino-hero owp-widget">
+				<div class="owp-hero__copy">
+					<div class="owp-filepino-hero__badge"><span aria-hidden="true">✓</span><p class="owp-filepino-hero__badge-text">Trusted Philippine business support</p></div>
+					<h3 class="owp-filepino-hero__heading owp-widget-heading"><span class="owp-filepino-hero__heading-intro">Your Integrated</span> Business Services Platform</h3>
+					<p class="owp-filepino-hero__tagline">Trusted expertise. From formation to growth.</p>
+					<p class="owp-filepino-hero__description">Establish your company with confidence. Get connected support for registration, operations, and compliance—so you can focus on growing your Philippine business.</p>
+					<div class="owp-filepino-hero__actions owp-actions">
 						<a class="owp-action owp-action--primary" href="#contact">Talk to Us</a>
 						<a class="owp-action owp-action--text" href="#owp-service-card">Explore our services <span aria-hidden="true">→</span></a>
 					</div>
 				</div>
-				<div class="demo-hero__art"><img src="assets/demo/hero/team.png" alt=""></div>
-				<div class="demo-hero__journey">
+				<div class="owp-filepino-hero__art" aria-hidden="true"></div>
+				<div class="owp-filepino-hero__journey">
 					<ol class="owp-milestones" aria-label="Service milestones">
-						<li class="owp-milestones__item"><span class="owp-milestones__marker"><img src="assets/demo/hero/registration.svg" alt=""></span><span class="owp-milestones__label">Establishment &amp;<br>Registration</span></li>
-						<li class="owp-milestones__item"><span class="owp-milestones__marker"><img src="assets/demo/hero/operations.svg" alt=""></span><span class="owp-milestones__label">Operations</span></li>
-						<li class="owp-milestones__item"><span class="owp-milestones__marker"><img src="assets/demo/hero/compliance.svg" alt=""></span><span class="owp-milestones__label">Compliance</span></li>
-						<li class="owp-milestones__item"><span class="owp-milestones__marker"><img src="assets/demo/hero/people.svg" alt=""></span><span class="owp-milestones__label">People &amp; HR</span></li>
-						<li class="owp-milestones__item"><span class="owp-milestones__marker"><img src="assets/demo/hero/growth.svg" alt=""></span><span class="owp-milestones__label">Sustainable<br>Growth</span></li>
+						<li class="owp-milestones__item"><span class="owp-milestones__marker"><img src="assets/images/hero/registration.svg" alt="" width="28" height="28"></span><span class="owp-milestones__label">Establishment &amp;<br>Registration</span></li>
+						<li class="owp-milestones__item"><span class="owp-milestones__marker"><img src="assets/images/hero/operations.svg" alt="" width="28" height="28"></span><span class="owp-milestones__label">Operations</span></li>
+						<li class="owp-milestones__item"><span class="owp-milestones__marker"><img src="assets/images/hero/compliance.svg" alt="" width="28" height="28"></span><span class="owp-milestones__label">Compliance</span></li>
+						<li class="owp-milestones__item"><span class="owp-milestones__marker"><img src="assets/images/hero/people.svg" alt="" width="28" height="28"></span><span class="owp-milestones__label">People &amp; HR</span></li>
+						<li class="owp-milestones__item"><span class="owp-milestones__marker"><img src="assets/images/hero/growth.svg" alt="" width="28" height="28"></span><span class="owp-milestones__label">Sustainable<br>Growth</span></li>
 					</ol>
 				</div>
 			</div>
 		</div>
-		<details class="demo-hero__original">
+		<details class="gallery demo-hero-original">
 			<summary>View the standalone Hero Section widget</summary>
 			<div class="gallery-preview gallery-preview--flush">
 				<div class="owp-hero owp-hero--split owp-widget">
@@ -127,6 +129,7 @@
 		</details>
 	</section>
 
+	<div class="gallery">
 	<section class="gallery-example" id="owp-team-carousel">
 		<h2>Our Team Carousel</h2>
 		<div class="owp-team owp-widget" role="region" aria-label="Example team profiles">
@@ -363,6 +366,7 @@
 		<p>Contact buttons link here for the demo. Set their destination in Elementor.</p>
 		<a href="#top">Back to the widget list</a>
 	</aside>
+	</div>
 </main>
 <script>document.getElementById('demo-year').textContent = new Date().getFullYear();</script>
 </body>

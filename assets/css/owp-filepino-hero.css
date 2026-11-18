@@ -1,0 +1,234 @@
+.owp-filepino-hero-shell {
+	container: owp-filepino-hero / inline-size;
+}
+
+.owp-filepino-hero {
+	display: grid;
+	grid-template-rows: 1fr auto;
+	min-height: clamp(560px, calc(100cqw * 41 / 72), 820px);
+	background: linear-gradient(rgb(9 27 44 / 22%), rgb(9 27 44 / 22%)), url("../images/hero/skyline.png") center / cover no-repeat;
+	color: #333;
+	font: 400 1rem/1.25 Poppins, system-ui, sans-serif;
+}
+
+.owp-filepino-hero .owp-hero__copy {
+	box-sizing: border-box;
+	width: min(calc(100% - 11.1111%), 1280px);
+	margin-inline: auto;
+	padding-block: min(10.2778cqw, 148px) 32px;
+	gap: 22px;
+	align-content: start;
+}
+
+.owp-filepino-hero .owp-filepino-hero__heading {
+	max-width: 596px;
+	color: inherit;
+	font: 600 40px/1.25 Poppins, system-ui, sans-serif;
+}
+
+.owp-filepino-hero__description {
+	max-width: 480px;
+	min-height: 84px;
+	font-size: 17px;
+}
+
+.owp-filepino-hero__actions {
+	gap: 24px;
+}
+
+.owp-filepino-hero__actions .owp-action--primary {
+	--owp-action-bg: var(--owp-button-primary-bg, #ffbf00);
+	--owp-action-fg: var(--owp-button-primary-fg, #333);
+	min-height: 48px;
+	padding: 13px 24px;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 22px;
+}
+
+.owp-filepino-hero__actions .owp-action--text {
+	--owp-action-fg: var(--owp-button-text-fg, #244d69);
+	gap: .3em;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.owp-filepino-hero__journey {
+	display: grid;
+	align-items: end;
+	box-sizing: border-box;
+	min-height: 205px;
+	padding: 0 4% 27px;
+	background: linear-gradient(transparent, rgb(5 17 31 / 45%) 45%, rgb(5 17 31 / 85%));
+}
+
+.owp-filepino-hero__journey .owp-milestones {
+	width: min(100%, 1325px);
+	margin-inline: auto;
+}
+
+.owp-filepino-hero__journey .owp-milestones__item:not(:last-child)::after {
+	inset-block-start: calc(var(--owp-milestone-size) / 2 - 1.5px);
+	height: 3px;
+}
+
+.owp-filepino-hero__journey .owp-milestones__marker img {
+	display: block;
+	width: 28px;
+	height: 28px;
+}
+
+.owp-filepino-hero__journey .owp-milestones__label {
+	max-width: 150px;
+	min-height: 34px;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 17px;
+	text-shadow: 0 1px 3px rgb(0 38 66 / 80%);
+}
+
+.owp-filepino-hero__badge,
+.owp-filepino-hero__tagline,
+.owp-filepino-hero__art {
+	display: none;
+}
+
+@container owp-filepino-hero (max-width: 1024px) {
+	.owp-filepino-hero {
+		grid-template-rows: auto auto;
+		gap: 44px;
+		min-height: 0;
+		padding: 32px 24px 48px;
+		background:
+			url("../images/hero/sun-corner.svg") -95px -125px no-repeat,
+			url("../images/hero/sky-sweep.svg") -120px 620px no-repeat,
+			url("../images/hero/gold-edge.svg") 318px 450px no-repeat,
+			linear-gradient(rgb(255 255 255 / 94.24%), rgb(255 255 255 / 94.24%)),
+			url("../images/hero/skyline.png") center / cover no-repeat white;
+	}
+
+	.owp-filepino-hero .owp-hero__copy {
+		width: 100%;
+		padding: 0;
+	}
+
+	.owp-filepino-hero .owp-filepino-hero__heading {
+		max-width: none;
+		font-size: 38px;
+		line-height: 48px;
+	}
+
+	.owp-filepino-hero__heading-intro {
+		display: block;
+	}
+
+	.owp-filepino-hero__description {
+		max-width: none;
+		min-height: 0;
+		font-size: 16px;
+	}
+
+	.owp-filepino-hero__badge {
+		display: inline-flex;
+		align-items: flex-start;
+		gap: 8px;
+		padding: 8px 14px;
+		border-radius: 30px;
+		background: white;
+		color: #244d69;
+		font-size: 8px;
+		font-weight: 500;
+		text-transform: uppercase;
+	}
+
+	.owp-filepino-hero__badge span {
+		flex: 0 0 12px;
+		color: #428db6;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.owp-filepino-hero__badge-text {
+		min-width: 154px;
+	}
+
+	.owp-filepino-hero__tagline {
+		display: block;
+		color: #327da7;
+		font-size: 20px;
+		font-weight: 500;
+	}
+
+	.owp-filepino-hero__journey,
+	.owp-filepino-hero__actions .owp-action--text {
+		display: none;
+	}
+
+	.owp-filepino-hero__art {
+		--owp-hero-photo: url("../images/hero/tablet-team.png");
+		--owp-hero-blue-border: url("../images/hero/tablet-blue-border.svg");
+		--owp-hero-gold-slash: url("../images/hero/tablet-gold-slash.svg");
+		--owp-hero-aqua-backing: url("../images/hero/tablet-aqua-backing.svg");
+		position: relative;
+		display: block;
+		justify-self: center;
+		width: min(100%, 520px);
+		aspect-ratio: 85 / 84;
+		background:
+			var(--owp-hero-blue-border) 45.45% 41.67% / 93.5294% auto no-repeat,
+			var(--owp-hero-gold-slash) right bottom / 93.5294% auto no-repeat,
+			var(--owp-hero-aqua-backing) left top / 93.5294% auto no-repeat;
+	}
+
+	.owp-filepino-hero__art::after {
+		position: absolute;
+		inset: 1.4881% auto auto 3.8235%;
+		width: 88.2353%;
+		height: 87.5%;
+		background: var(--owp-hero-photo) center / 100% 100% no-repeat;
+		content: "";
+	}
+}
+
+@container owp-filepino-hero (max-width: 767px) {
+	.owp-filepino-hero .owp-filepino-hero__heading {
+		font-size: 31px;
+		line-height: 39px;
+	}
+
+	.owp-filepino-hero__tagline {
+		font-size: 17px;
+		line-height: 22px;
+	}
+
+	.owp-filepino-hero__description {
+		font-size: 14px;
+	}
+
+	.owp-filepino-hero__art {
+		--owp-hero-photo: url("../images/hero/team.png");
+		--owp-hero-blue-border: url("../images/hero/blue-border.svg");
+		--owp-hero-gold-slash: url("../images/hero/gold-slash.svg");
+		--owp-hero-aqua-backing: url("../images/hero/aqua-backing.svg");
+		width: min(100%, clamp(342px, calc(47.09cqw + 158.34px), 520px));
+	}
+}
+
+@container owp-filepino-hero (max-width: 359px) {
+	.owp-filepino-hero .owp-filepino-hero__heading {
+		font-size: 29px;
+		line-height: 37px;
+	}
+
+	.owp-filepino-hero__tagline {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	.owp-filepino-hero__art {
+		--owp-hero-photo: url("../images/hero/compact-team.png");
+		--owp-hero-blue-border: url("../images/hero/compact-blue-border.svg");
+		--owp-hero-gold-slash: url("../images/hero/compact-gold-slash.svg");
+		--owp-hero-aqua-backing: url("../images/hero/compact-aqua-backing.svg");
+	}
+}

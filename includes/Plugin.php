@@ -31,6 +31,7 @@ final class Plugin {
 	 * Shared frontend stylesheet handle.
 	 */
 	const STYLE_HANDLE = 'omni-widget-pack';
+	const FILEPINO_HERO_STYLE_HANDLE = 'owp-filepino-hero';
 	const INTERACTION_HANDLE = 'omni-widget-pack-interactions';
 
 	/**
@@ -144,6 +145,18 @@ final class Plugin {
 			self::STYLE_HANDLE,
 			OWP_URL . 'assets/css/omni-widget-pack.css',
 			array(),
+			OWP_VERSION
+		);
+		wp_register_style(
+			'owp-filepino-hero-font',
+			'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap',
+			array(),
+			null
+		);
+		wp_register_style(
+			self::FILEPINO_HERO_STYLE_HANDLE,
+			OWP_URL . 'assets/css/owp-filepino-hero.css',
+			array( self::STYLE_HANDLE, 'owp-filepino-hero-font' ),
 			OWP_VERSION
 		);
 		ButtonStyles::add_styles();

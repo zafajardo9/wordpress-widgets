@@ -50,7 +50,7 @@ are available in Elementor and open the same demo.
 | Button | `owp-button` | Primary, Secondary, Accent, Ghost, Text Link, Custom, and Icon Only variants. |
 | Navigation Bar | `owp-navbar` | Brand, navigation, action, and responsive menu drawer. |
 | Universal Footer | `owp-footer` | Four columns, contact details, social links, and an automatic copyright year. |
-| Hero Section | `owp-hero` | Headline, two actions, and optional service milestones. |
+| Hero Section | `owp-hero` | Standard hero and a responsive FilePino Homepage layout with editable copy. |
 | Service Milestones | `owp-service-milestones` | Glowing connector, white-bordered markers, and editable labels and icons. |
 | CTA Banner | `owp-cta-banner` | Cover photo, badge, highlighted heading, and action. |
 | Service Card | `owp-service-card` | Thumbnail, title, tag, description, and action. |
@@ -66,6 +66,14 @@ and text colors. Clear a field to restore the preset. In Elementor, select a
 variant under the Button widget's **Content** tab. **Style → Button** overrides
 colors and radius for the selected widget. The Custom variant starts with
 Primary's colors and supports its own overrides.
+
+## Using the FilePino Homepage hero
+
+In Elementor, select **Hero Section → Content → Layout → FilePino Homepage** and
+place the widget in a full-width container. The desktop layout shows both
+actions and the service milestones. Tablet and mobile show the badge, tagline,
+and team photo alongside the primary action. The layout responds to the
+widget's available width.
 
 ## Using Site Container
 
