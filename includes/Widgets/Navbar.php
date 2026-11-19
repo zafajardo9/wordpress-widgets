@@ -40,10 +40,36 @@ final class Navbar extends BaseWidget {
 		) );
 		$this->field( 'action_text', esc_html__( 'Action Label', 'omni-widget-pack' ), Controls_Manager::TEXT, esc_html__( 'Talk to Us', 'omni-widget-pack' ) );
 		$this->field( 'action_url', esc_html__( 'Action Link', 'omni-widget-pack' ), Controls_Manager::URL, array( 'url' => '#contact' ) );
-		$this->field( 'sticky', esc_html__( 'Sticky Frosted Header', 'omni-widget-pack' ), Controls_Manager::SWITCHER, '', array( 'prefix_class' => 'owp-navbar-sticky-' ) );
+		$this->field( 'sticky', esc_html__( 'Sticky Navigation', 'omni-widget-pack' ), Controls_Manager::SWITCHER, '', array( 'prefix_class' => 'owp-navbar-sticky-' ) );
+		$this->field( 'scroll_appearance', esc_html__( 'Scroll Appearance', 'omni-widget-pack' ), Controls_Manager::SELECT, 'background', array(
+			'options' => array(
+				'background' => esc_html__( 'Frosted Background', 'omni-widget-pack' ),
+				'floating' => esc_html__( 'Floating Bar', 'omni-widget-pack' ),
+			),
+			'condition' => array( 'sticky' => 'yes' ),
+		) );
 		$this->end_controls_section();
+
+		$this->start_controls_section( 'scroll_style', array(
+			'label' => esc_html__( 'Scrolled Navbar', 'omni-widget-pack' ),
+			'tab' => Controls_Manager::TAB_STYLE,
+			'condition' => array( 'sticky' => 'yes' ),
+		) );
+		foreach ( array(
+			'background' => esc_html__( 'Background Color', 'omni-widget-pack' ),
+			'text' => esc_html__( 'Text Color', 'omni-widget-pack' ),
+		) as $property => $label ) {
+			$this->add_control( 'scroll_' . $property, array(
+				'label' => $label,
+				'type' => Controls_Manager::COLOR,
+				'selectors' => array( '{{WRAPPER}} .owp-navbar' => '--owp-navbar-scroll-' . $property . ': {{VALUE}};' ),
+			) );
+		}
+		$this->end_controls_section();
+
 		$this->typography_section( array(
-			'nav' => array( esc_html__( 'Navigation', 'omni-widget-pack' ), '.owp-nav-link' ),
+			'brand' => array( esc_html__( 'Brand Name', 'omni-widget-pack' ), '.owp-navbar .owp-navbar__brand' ),
+			'nav' => array( esc_html__( 'Navigation', 'omni-widget-pack' ), '.owp-navbar :is(.owp-nav-link, .owp-navbar__open, .owp-navbar__close)' ),
 			'action' => array( esc_html__( 'Action', 'omni-widget-pack' ), '.owp-navbar .owp-action' ),
 		) );
 	}
@@ -96,7 +122,7 @@ final class Navbar extends BaseWidget {
 		$dialog_id = 'owp-menu-' . wp_generate_uuid4();
 		$menu_label = esc_attr__( 'Main menu', 'omni-widget-pack' );
 		?>
-		<header class="owp-navbar owp-widget">
+		<header class="owp-navbar owp-widget<?php echo 'floating' === ( $settings['scroll_appearance'] ?? '' ) ? ' owp-navbar--floating' : ''; ?>">
 			<a class="owp-navbar__brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( $brand ); ?>">
 				<?php if ( ! empty( $settings['logo']['id'] ) || ! empty( $settings['logo']['url'] ) ) :
 					$this->image( $settings['logo'], 'medium' );

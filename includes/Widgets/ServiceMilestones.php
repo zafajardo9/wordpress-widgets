@@ -50,6 +50,12 @@ final class ServiceMilestones extends BaseWidget {
 			'fields' => $item->get_controls(),
 			'title_field' => '{{ label }}',
 		) );
+		$this->field( 'label_position', esc_html__( 'Label Position', 'omni-widget-pack' ), Controls_Manager::SELECT, 'below', array(
+			'options' => array(
+				'below' => esc_html__( 'Below Circle', 'omni-widget-pack' ),
+				'above' => esc_html__( 'Above Circle', 'omni-widget-pack' ),
+			),
+		) );
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'milestone_style', array(
@@ -90,8 +96,9 @@ final class ServiceMilestones extends BaseWidget {
 		if ( empty( $items ) ) {
 			return;
 		}
+		$labels_above = 'above' === $this->get_settings_for_display( 'label_position' );
 		?>
-		<ol class="owp-milestones owp-widget" aria-label="<?php esc_attr_e( 'Service milestones', 'omni-widget-pack' ); ?>">
+		<ol class="owp-milestones owp-widget<?php echo $labels_above ? ' owp-milestones--labels-above' : ''; ?>" aria-label="<?php esc_attr_e( 'Service milestones', 'omni-widget-pack' ); ?>">
 			<?php foreach ( $items as $item ) : ?>
 				<li class="owp-milestones__item">
 					<span class="owp-milestones__marker" aria-hidden="true">

@@ -1,7 +1,14 @@
 (function () {
 	const mobile = window.matchMedia('(max-width: 1024px)');
+	function updateScrollAppearance() {
+		document.documentElement.classList.toggle('owp-page-scrolled', window.scrollY > 24);
+	}
+
+	window.addEventListener('scroll', updateScrollAppearance, { passive: true });
+	window.addEventListener('pageshow', updateScrollAppearance);
 
 	function enhanceMenus() {
+		updateScrollAppearance();
 		document.querySelectorAll('.owp-navbar').forEach((nav) => {
 			const drawer = nav.querySelector('.owp-navbar__drawer');
 			if (drawer && typeof drawer.showModal === 'function') {
